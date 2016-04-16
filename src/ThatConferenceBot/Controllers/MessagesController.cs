@@ -9,7 +9,9 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Utilities;
 using Newtonsoft.Json;
 using Microsoft.Bot.Builder.Dialogs;
-using ThatConferenceBot.DialogHelpers;
+using ThatConferenceBot.Helpers;
+using MyFirstBotApplication.Helpers;
+using Microsoft.Bot.Builder.FormFlow;
 
 namespace ThatConferenceBot
 {
@@ -24,16 +26,26 @@ namespace ThatConferenceBot
 		{
 			if (message.Type == "Message")
 			{
-				// calculate something for us to return
-				int length = (message.Text ?? string.Empty).Length;
-
-				// return our reply to the user
-				return await Conversation.SendAsync(message, () => new SimpleDialog());
+				try
+				{
+					//return await Conversation.SendAsync(message, MakeReservationDialog);
+					return await Conversation.SendAsync(message, () => new SimpleDialog(message));
+					//return message.CreateReplyMessage("hello");
+				}
+				catch (Exception e)
+				{
+					return null;
+				}
 			}
 			else
 			{
 				return HandleSystemMessage(message);
 			}
+		}
+		
+		internal static IDialog<ReservationForm> MakeReservationDialog()
+		{
+			return Chain.From(() => FormDialog.FromForm(ReservationForm.BuildForm));
 		}
 
 		private Message HandleSystemMessage(Message message)
