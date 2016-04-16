@@ -45,7 +45,7 @@ namespace ThatConferenceBot.Helpers
 		[LuisIntent("None")]
 		public async Task None(IDialogContext context, LuisResult result)
 		{
-			await context.PostAsync("hi");
+			await context.PostAsync("Could not understand command. Please try again.");
 			context.Wait(MessageReceived);
 		}
 		

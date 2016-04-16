@@ -118,7 +118,6 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="DialogHelpers\Dialog.cs" />
     <Compile Include="Domain\Models\Reservation.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Helpers\Dialog.cs" />
