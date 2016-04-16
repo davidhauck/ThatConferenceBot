@@ -8,8 +8,10 @@ using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Utilities;
 using Newtonsoft.Json;
+using Microsoft.Bot.Builder.Dialogs;
+using ThatConferenceBot.DialogHelpers;
 
-namespace MyFirstBotApplication
+namespace ThatConferenceBot
 {
 	[BotAuthentication]
 	public class MessagesController : ApiController
@@ -26,7 +28,7 @@ namespace MyFirstBotApplication
 				int length = (message.Text ?? string.Empty).Length;
 
 				// return our reply to the user
-				return message.CreateReplyMessage($"You sent {length} characters");
+				return await Conversation.SendAsync(message, () => new SimpleDialog());
 			}
 			else
 			{
