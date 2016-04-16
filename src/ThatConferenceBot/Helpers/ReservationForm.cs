@@ -13,18 +13,12 @@ namespace MyFirstBotApplication.Helpers
 	public class ReservationForm
 	{
 		public DateTime? ReservationStartDate { get; set; }
-		public DateTime? EndDate
-		{
-			get
-			{
-				return ReservationStartDate + TimeSpan.FromDays(7);
-			}
-		}
 		public DateTime? ReservationEndDate { get; set; }
 		public Campsite Campsite { get; set; }
 
 		public static IForm<ReservationForm> BuildForm()
 		{
+			DateTime possibleEndDate = DateTime.MinValue;
 			return new FormBuilder<ReservationForm>()
 				.Message("We will create you a reservation!")
 				.Field(nameof(ReservationForm.ReservationStartDate),
@@ -39,11 +33,17 @@ namespace MyFirstBotApplication.Helpers
 							result.IsValid = false;
 						return result;
 					})
-				.Message("Maximum End Date: {ReservationStartDate}")
-				.Field(nameof(ReservationForm.ReservationEndDate))
+				.Field(nameof(ReservationForm.ReservationEndDate),
+					validate: async (state, response) =>
+					{
+						DateTime chosenDate = DateTime.Parse(response.ToString());
+						ValidateResult result = new ValidateResult()
+						{
+							IsValid = true
+						};
+						return result;
+					})
 				.Field(nameof(ReservationForm.Campsite))
-				.AddRemainingFields()
-				.Message("Thanks for reserving a campsite!")
 				.OnCompletionAsync(MakeReservation)
 				.Build();
 		}
@@ -52,6 +52,11 @@ namespace MyFirstBotApplication.Helpers
 		{
 			await Task.Delay(10);
 			return true;
+		}
+
+		private static DateTime GetPossibleEndDateForStartDate(DateTime value)
+		{
+			return value + TimeSpan.FromDays(7);
 		}
 
 		private static Task MakeReservation(IDialogContext context, ReservationForm state)
