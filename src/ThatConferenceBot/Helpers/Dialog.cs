@@ -29,7 +29,9 @@ namespace ThatConferenceBot.Helpers
 		[LuisIntent("Book Campsite")]
 		public async Task BookCampsite(IDialogContext context, LuisResult result)
 		{
-			context.Call(MakeReservationDialog(), FinishedReservation);
+			var reservationDialog = MakeReservationDialog();
+			await reservationDialog.StartAsync(context);
+			await context.PostAsync("Creating a campsite reservation. Please type anything to continue.");
 		}
 
 		private Task FinishedReservation(IDialogContext context, IAwaitable<object> result)
