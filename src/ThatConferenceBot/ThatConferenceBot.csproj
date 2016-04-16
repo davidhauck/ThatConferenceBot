@@ -120,11 +120,14 @@
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="DialogHelpers\Dialog.cs" />
     <Compile Include="Domain\Models\Reservation.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Helpers\Dialog.cs" />
     <Compile Include="Domain\ThatConferenceBotDbContext.cs" />
     <Compile Include="Domain\Models\Campsite.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ReservationForm.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThatConferenceBotDbMigrations\201604161611015_NewMigration.cs" />
