@@ -109,7 +109,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Properties\PublishProfiles\TestBotFramework.pubxml" />
+    <None Include="Properties\PublishProfiles\That Conference Bot.pubxml" />
+    <None Include="Properties\PublishProfiles\ThatConferenceBot.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
