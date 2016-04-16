@@ -16,13 +16,6 @@ namespace ThatConferenceBot.Helpers
 	public class SimpleDialog : LuisDialog<object>
 	{
 		public const string ENTITY_DATETIME_DATE = "builtin.datetime.date";
-		Message _message;
-
-		public SimpleDialog(Message message)
-		{
-			_message = message;
-		}
-
 		public override Task StartAsync(IDialogContext context)
 		{
 			return base.StartAsync(context);
@@ -36,15 +29,14 @@ namespace ThatConferenceBot.Helpers
 		[LuisIntent("Book Campsite")]
 		public async Task BookCampsite(IDialogContext context, LuisResult result)
 		{
-			await Conversation.SendAsync(_message, MakeReservationDialog);
-
-			//EntityRecommendation date;
-			//if (!result.TryFindEntity(ENTITY_DATETIME_DATE, out date))
-			//{
-			//	PromptDialog.Text(context, GotDate, "Please enter a date", "Didn't get that!");
-			//}
+			context.Call(MakeReservationDialog(), FinishedReservation);
 		}
-		
+
+		private Task FinishedReservation(IDialogContext context, IAwaitable<object> result)
+		{
+			throw new NotImplementedException();
+		}
+
 		internal static IDialog<ReservationForm> MakeReservationDialog()
 		{
 			return Chain.From(() => FormDialog.FromForm(ReservationForm.BuildForm));
@@ -53,10 +45,10 @@ namespace ThatConferenceBot.Helpers
 		[LuisIntent("None")]
 		public async Task None(IDialogContext context, LuisResult result)
 		{
-			;
+			await context.PostAsync("hi");
+			context.Wait(MessageReceived);
 		}
-
-
+		
 		[LuisIntent("Cancel Reservation")]
 		public async Task CancelReservation(IDialogContext context, LuisResult result)
 		{

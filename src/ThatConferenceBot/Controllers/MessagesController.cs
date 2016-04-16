@@ -29,7 +29,7 @@ namespace ThatConferenceBot
 				try
 				{
 					//return await Conversation.SendAsync(message, MakeReservationDialog);
-					return await Conversation.SendAsync(message, () => new SimpleDialog(message));
+					return await Conversation.SendAsync(message, () => new SimpleDialog());
 					//return message.CreateReplyMessage("hello");
 				}
 				catch (Exception e)
