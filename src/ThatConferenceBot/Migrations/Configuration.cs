@@ -21,69 +21,99 @@ namespace MyFirstBotApplication.Migrations
 
         protected override void Seed(MyFirstBotApplication.Domain.ThatConferenceBotDbContext context)
         {
-            if (!IsCampsiteInDb(context, "IsStoreEnabled"))
+            if (!IsCampsiteInDb(context, "A1"))
             {
-                var campsite1 = new Campsite()
+                var campsite = new Campsite()
                 {
                     Id = Guid.NewGuid(),
                     Name = "A1"
                 };
-                context.Campsites.Add(campsite1);
+                context.Campsites.Add(campsite);
             }
-            if (!IsCampsiteInDb(context, "IsStoreEnabled"))
+            if (!IsCampsiteInDb(context, "A2"))
             {
-                var campsite1 = new Campsite()
+                var campsite = new Campsite()
                 {
                     Id = Guid.NewGuid(),
                     Name = "A2"
                 };
-                context.Campsites.Add(campsite1);
+                context.Campsites.Add(campsite);
             }
-            if (!IsCampsiteInDb(context, "IsStoreEnabled"))
+            if (!IsCampsiteInDb(context, "A3"))
             {
-                var campsite1 = new Campsite()
+                var campsite = new Campsite()
                 {
                     Id = Guid.NewGuid(),
                     Name = "A3"
                 };
-                context.Campsites.Add(campsite1);
+                context.Campsites.Add(campsite);
             }
-            if (!IsCampsiteInDb(context, "IsStoreEnabled"))
+            if (!IsCampsiteInDb(context, "B1"))
             {
-                var campsite1 = new Campsite()
+                var campsite = new Campsite()
                 {
                     Id = Guid.NewGuid(),
                     Name = "B1"
                 };
-                context.Campsites.Add(campsite1);
+                context.Campsites.Add(campsite);
             }
-            if (!IsCampsiteInDb(context, "IsStoreEnabled"))
+            if (!IsCampsiteInDb(context, "B2"))
             {
-                var campsite1 = new Campsite()
+                var campsite = new Campsite()
                 {
                     Id = Guid.NewGuid(),
                     Name = "B2"
                 };
-                context.Campsites.Add(campsite1);
+                context.Campsites.Add(campsite);
             }
-            if (!IsCampsiteInDb(context, "IsStoreEnabled"))
+            if (!IsCampsiteInDb(context, "B3"))
             {
-                var campsite1 = new Campsite()
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "B2"
-                };
-                context.Campsites.Add(campsite1);
-            }
-            if (!IsCampsiteInDb(context, "IsStoreEnabled"))
-            {
-                var campsite1 = new Campsite()
+                var campsite = new Campsite()
                 {
                     Id = Guid.NewGuid(),
                     Name = "B3"
                 };
-                context.Campsites.Add(campsite1);
+                context.Campsites.Add(campsite);
             }
+            if (!IsCampsiteInDb(context, "C1"))
+            {
+                var campsite = new Campsite()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "C1"
+                };
+                context.Campsites.Add(campsite);
+            }
+            if (!IsCampsiteInDb(context, "C2"))
+            {
+                var campsite = new Campsite()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "C2"
+                };
+                context.Campsites.Add(campsite);
+            }
+            if (!IsCampsiteInDb(context, "C3"))
+            {
+                var campsite = new Campsite()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "C3"
+                };
+                context.Campsites.Add(campsite);
+            }
+
+
+            var reservation = new Reservation()
+            {
+                Id = Guid.NewGuid(),
+                Campsite = context.Campsites.Where(s => s.Name == "ebc8b029 - d596 - 413d - 8510 - 452511ae1756").FirstOrDefault(),
+                ArrivalDate = DateTime.Parse("12/05/2016"),
+                DepartueDate = DateTime.Parse("12/07/2016")
+
+            };
+        
+            context.Reservations.Add(reservation);
 
             context.SaveChanges();
         }

@@ -16,6 +16,6 @@ namespace MyFirstBotApplication.Domain
         }
 
         public DbSet<Campsite> Campsites { get; set; }
- 
+        public DbSet<Reservation> Reservations { get; set; }
     }
 }
