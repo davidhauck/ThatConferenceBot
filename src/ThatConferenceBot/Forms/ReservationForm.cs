@@ -70,7 +70,7 @@ namespace ThatConferenceBot.Forms
 
 		private static async Task MakeReservation(IDialogContext context, ReservationForm state)
 		{
-			await context.PostAsync("Reservation successfully created!");
+			await context.PostAsync($"Reservation successfully created from {state.ReservationStartDate.Value.ToShortDateString()} to {state.ReservationEndDate.Value.ToShortDateString()} in campsite {state.Campsite}!");
 		}
 	}
 }
